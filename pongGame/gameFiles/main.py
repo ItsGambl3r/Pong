@@ -20,6 +20,7 @@ surface = pygame.display.set_mode((screenWidth, screenHeight), pygame.FULLSCREEN
 # This should work for both windows and mac
 backgroundPath = os.path.join("pongGame", "Assets", "images", "YuriDokiDoki.png")
 background = pygame.image.load(backgroundPath)
+background = pygame.transform.scale(background, (screenWidth, screenHeight))
 opacity = 0
 background.set_alpha(opacity)
 WHITE = (255, 255, 255)
