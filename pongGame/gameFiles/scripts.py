@@ -1,3 +1,8 @@
+# Author: Gabriel Walker
+# Student ID: gcw37
+# FileName: scripts.py
+# Purpose: module for scripts
+
 import pygame
 
 WHITE = (255, 255, 255)

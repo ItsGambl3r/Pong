@@ -58,6 +58,7 @@ pygame.mixer.music.play(-1)
 if __name__ == "__main__":
 
     while running:
+        print(ball.getXSpeed(), ball.getYSpeed())
         isFullscreen = pygame.display.get_surface().get_flags() & pygame.FULLSCREEN
         screenWidth, screenHeight = surface.get_size()
         
@@ -115,7 +116,7 @@ if __name__ == "__main__":
                         pygame.display.set_mode((screenWidth, screenHeight), pygame.RESIZABLE)
 
         if ball.intersects(playerPaddle) or ball.intersects(computerPaddle):
-            ball.setXSpeed(ball.getXSpeed()*-1.5)
+            ball.setXSpeed(ball.getXSpeed()*-1.25)
             pongSound.play()
 
         if ball.getLoc()[0] <= ball.getRadius():
