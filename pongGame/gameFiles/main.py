@@ -52,7 +52,7 @@ STARTDELAY = True
 
 direction = [1, -1]
 images = []
-pygame.mixer.music.load(os.path.join("pongGame", "Assets", "soundTracks", "candyHearts.mp3"))
+pygame.mixer.music.load(os.path.join("pongGame", "Assets", "soundTracks", "doki.mp3"))
 pygame.mixer.music.play(-1)
 
 if __name__ == "__main__":
