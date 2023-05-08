@@ -8,6 +8,7 @@ import pygame
 
 '''
 Class: Ball
+modified from template
 '''
 
 class Ball(Drawable):

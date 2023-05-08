@@ -8,6 +8,7 @@ import pygame
 
 '''
 Class: Drawable
+modified from template
 '''
 
 class Drawable(ABC):
@@ -17,9 +18,11 @@ class Drawable(ABC):
         self.__y = y
         self.__visible = visible
     
+    @abstractmethod
     def draw(self):
         pass
 
+    @abstractmethod
     def getRect(self):
         pass
 
@@ -59,5 +62,6 @@ class Drawable(ABC):
         (rect1.y < rect2.y + rect2.height) and \
         (rect1.height + rect1.y > rect2.y):
             return True
-        return False 
+        return False
+    
 

@@ -5,6 +5,10 @@
 
 from drawable import Drawable
 import pygame, os
+'''
+Class: Text
+modified from template
+'''
 
 class Text(Drawable):
     #TODO: Add costum font /Applications/pongGame/Assets/Fonts/DJ5CTRIAL.ttf

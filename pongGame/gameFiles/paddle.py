@@ -3,11 +3,13 @@
 # FileName: paddle.py
 # Purpose: Paddle class
 
+
 from drawable import Drawable
 import pygame
 
 '''
 Class: Paddle
+modified from template
 '''
 
 class Paddle(Drawable):
