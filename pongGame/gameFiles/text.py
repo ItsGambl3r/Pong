@@ -25,8 +25,8 @@ class Text(Drawable):
         True, self.__color)
         surface.blit(self.__surface, self.getLoc())
 
-    def get_rect(self):
-        return self.__surface.get_rect()
+    def getRect(self):
+        return self.__surface.getRect()
 
     def setMessage(self, message):
     

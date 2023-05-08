@@ -58,7 +58,6 @@ pygame.mixer.music.play(-1)
 if __name__ == "__main__":
 
     while running:
-        print(ball.getXSpeed(), ball.getYSpeed())
         isFullscreen = pygame.display.get_surface().get_flags() & pygame.FULLSCREEN
         screenWidth, screenHeight = surface.get_size()
         
