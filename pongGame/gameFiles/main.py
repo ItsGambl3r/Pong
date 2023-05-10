@@ -3,11 +3,12 @@
 # FileName: main.py
 # Purpose: Handle game loop
 
-import pygame, sys, os, random
+import pygame, sys, os, random, getpass
 from scripts import drawDottedLine
 from ball import Ball
 from paddle import Paddle
 from text import Text
+from perimeter import Perimeter
 
 pygame.init()
 pygame.mixer.init()
@@ -36,29 +37,38 @@ gameObjects.append(ball)
 gameObjects.append(playerPaddle)
 gameObjects.append(computerPaddle)
 
- 
+perimeter = Perimeter(0, 0, screenWidth, screenHeight, WHITE)
+gameObjects.append(perimeter)
+
+try: userID = getpass.getuser()
+except: userID = "Player"
+
 fpsClock = pygame.time.Clock()
 playerScore, computerScore = 0, 0
-playerScoreText = Text(f"{playerScore}", screenWidth * (1 / 4), screenHeight * (1 / 12), WHITE, 90)
-computerScoreText = Text(f"{computerScore}", screenWidth * (3 / 4), screenHeight * (1 / 12), WHITE, 90)
-gameObjects.append(playerScoreText)
-gameObjects.append(computerScoreText)
-counter = 0
+playerScoreText = Text(f"{userID} {playerScore}", screenWidth * (1 / 4), screenHeight * (1 / 12), WHITE, 20)
+computerScoreText = Text(f"Player2: {computerScore}", screenWidth * (3 / 4), screenHeight * (1 / 12), WHITE, 20)
+
+for gameObject in gameObjects:
+    if isinstance(gameObject, Text):
+        gameObject.updateLoc()
+
 wallCollision = pygame.mixer.Sound(os.path.join("pongGame", "Assets", "soundsEffects", "wallCollision.mp3"))
 pongSound = pygame.mixer.Sound(os.path.join("pongGame", "Assets","soundsEffects", "pongSound.mp3"))
 crash = pygame.mixer.Sound(os.path.join("pongGame", "Assets","soundsEffects", "crash.mp3"))
 running = True
 STARTDELAY = True
-
 direction = [1, -1]
 images = []
 pygame.mixer.music.load(os.path.join("pongGame", "Assets", "soundTracks", "doki.mp3"))
 pygame.mixer.music.play(-1)
 
 if __name__ == "__main__":
+    counter = 0
+    playerScoreText.updateLoc()
+    computerScoreText.updateLoc()
 
     while running:
-        isFullscreen = pygame.display.get_surface().get_flags() & pygame.FULLSCREEN
+        isFullscreen = pygame.display.get_surface().get_flags() and pygame.FULLSCREEN
         screenWidth, screenHeight = surface.get_size()
         
         # TODO: Fix mouse visibility
@@ -85,11 +95,9 @@ if __name__ == "__main__":
         surface.fill((0, 0, 0))
         surface.blit(background, (0, 0))
         drawDottedLine(surface, (screenWidth / 2, 0), (screenWidth / 2, screenHeight))
-        ball.draw(surface)
-        playerScoreText.draw(surface)
-        computerScoreText.draw(surface)
-        playerPaddle.draw(surface)
-        computerPaddle.draw(surface)
+        for gameObject in gameObjects:
+            gameObject.draw(surface)
+
         playerPaddle.followMouse()
         computerPaddle.followObject(ball)
 
@@ -104,8 +112,10 @@ if __name__ == "__main__":
             if event.type == pygame.VIDEORESIZE:
                 #TODO: Resizing screws ups objects not on screen
                 ball.setLoc(event.w / 2, event.h / 2) #
-                playerScoreText = Text(f"{playerScore}", event.w * (1 / 4), event.h * (1 / 12), WHITE, 90)
-                computerScoreText = Text(f"{computerScore}", event.w * (3 / 4), event.h * (1 / 12), WHITE, 90)
+                playerScoreText = Text(f"{userID}: {playerScore}", event.w * (1 / 4), event.h * (1 / 12), WHITE, 50)
+                computerScoreText = Text(f"Player2: {computerScore}", event.w * (3 / 4), event.h * (1 / 12), WHITE, 50)
+                playerScoreText.updateLoc()
+                computerScoreText.updateLoc()
                 playerPaddle.setX(event.w * (1 / 15))
                 computerPaddle.setX(event.w * (14 / 15))
 
@@ -123,15 +133,15 @@ if __name__ == "__main__":
             crash.play()
             STARTDELAY = True
             computerScore += 1
-            computerScoreText.setMessage(f"{computerScore}")
+            computerScoreText.updateMessage(f": {computerScore}")
             opacity += 10
 
         if ball.getLoc()[0] >= screenWidth - ball.getRadius():
             ball.setLoc(halfScreenWidth, halfScreenHeight)
             crash.play()
             STARTDELAY = True
-            playerScore += 1 
-            playerScoreText.setMessage(f"{playerScore}")
+            playerScore += 1
+            playerScoreText.updateMessage(f"{userID}: {playerScore}")
             opacity += 10
 
         if ball.getLoc()[1] <= ball.getRadius() or ball.getLoc()[1] >= screenHeight - ball.getRadius():

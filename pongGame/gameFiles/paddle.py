@@ -14,16 +14,16 @@ modified from template
 
 class Paddle(Drawable):
 
-    def __init__(self, x, y, width, height, color, difficulty = 1):
-        surface = pygame.display.get_surface()
+    def __init__(self, x, y, width, height, color):
         super().__init__(x, y)
         self.__color = color
         self.__width = width
         self.__height = height
-        self.__difficulty = difficulty
+        self.__difficulty = 1
 
 
-    def draw(self, surface):
+    def draw(self):
+        surface = self.getSurface()
         if self.__color == (0, 0, 0):
             pygame.draw.rect(surface, self.__color, self.getRect(), 1)
         pygame.draw.rect(surface, self.__color, self.getRect())
@@ -53,6 +53,16 @@ class Paddle(Drawable):
             self.setY(pygame.display.get_surface().get_height() - self.__height)
         else:
             self.setY(mouseY - self.__height/2)
+
+    def idle(self):
+        pass
+
+    def track(self):
+        pass
+
+    def predict(self):
+        pass
+
 
     def followObject(self, object):
         if self.__difficulty == 1:

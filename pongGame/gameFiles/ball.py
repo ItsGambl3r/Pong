@@ -19,9 +19,9 @@ class Ball(Drawable):
        self.__speedX = 1
        self.__speedY = 1
 
-    def draw(self, surface):
+    def draw(self):
         if self.isVisible():
-            pygame.draw.circle(surface, self.__color, self.getLoc(), self.__radius)
+            pygame.draw.circle(self.getSurface(), self.__color, self.getLoc(), self.__radius)
         
     def setYSpeed(self, speedY):
         self.__speedY = speedY

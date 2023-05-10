@@ -44,6 +44,9 @@ class Drawable(ABC):
 
     def setY(self, y):
         self.__y = y
+
+    def getSurface(self):
+        return self.__surface
         
     def isVisible(self):
         return self.__visible
