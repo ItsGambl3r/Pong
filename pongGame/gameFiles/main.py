@@ -103,9 +103,7 @@ if __name__ == "__main__":
 
         playerPaddle.followMouse()
         computerPaddle.followObject(ball)
-
-        soundtrack_end_event = pygame.USEREVENT + 1
-        pygame.mixer.music.set_endevent(soundtrack_end_event)
+    
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
