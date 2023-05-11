@@ -45,8 +45,8 @@ except: userID = "Player"
 
 fpsClock = pygame.time.Clock()
 playerScore, computerScore = 0, 0
-playerScoreText = Text(f"{userID} {playerScore}", screenWidth * (1 / 4), screenHeight * (1 / 12), WHITE, 20)
-computerScoreText = Text(f"Player2: {computerScore}", screenWidth * (3 / 4), screenHeight * (1 / 12), WHITE, 20)
+playerScoreText = Text(f"{userID} {playerScore}", screenWidth * (1 / 4), screenHeight * (1 / 12), WHITE, 50)
+computerScoreText = Text(f"Player2: {computerScore}", screenWidth * (3 / 4), screenHeight * (1 / 12), WHITE, 50)
 
 for gameObject in gameObjects:
     if isinstance(gameObject, Text):
@@ -61,6 +61,9 @@ direction = [1, -1]
 images = []
 pygame.mixer.music.load(os.path.join("pongGame", "Assets", "soundTracks", "doki.mp3"))
 pygame.mixer.music.play(-1)
+
+gameObjects.append(playerScoreText)
+gameObjects.append(computerScoreText)
 
 if __name__ == "__main__":
     counter = 0
@@ -96,7 +99,7 @@ if __name__ == "__main__":
         surface.blit(background, (0, 0))
         drawDottedLine(surface, (screenWidth / 2, 0), (screenWidth / 2, screenHeight))
         for gameObject in gameObjects:
-            gameObject.draw(surface)
+            gameObject.draw()
 
         playerPaddle.followMouse()
         computerPaddle.followObject(ball)
@@ -112,12 +115,13 @@ if __name__ == "__main__":
             if event.type == pygame.VIDEORESIZE:
                 #TODO: Resizing screws ups objects not on screen
                 ball.setLoc(event.w / 2, event.h / 2) #
-                playerScoreText = Text(f"{userID}: {playerScore}", event.w * (1 / 4), event.h * (1 / 12), WHITE, 50)
-                computerScoreText = Text(f"Player2: {computerScore}", event.w * (3 / 4), event.h * (1 / 12), WHITE, 50)
+                playerScoreText.setLoc(event.w * (1 / 4), event.h * (1 / 12))
+                computerScoreText.setLoc(event.w * (3 / 4), event.h * (1 / 12))
                 playerScoreText.updateLoc()
                 computerScoreText.updateLoc()
                 playerPaddle.setX(event.w * (1 / 15))
                 computerPaddle.setX(event.w * (14 / 15))
+
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
