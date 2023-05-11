@@ -95,7 +95,7 @@ if __name__ == "__main__":
         
         #TODO: add surface attribute to drawable class 
         # iterate through gameObjects and draw them
-        surface.fill((0, 0, 0))
+        surface.fill((BLACK))
         surface.blit(background, (0, 0))
         drawDottedLine(surface, (screenWidth / 2, 0), (screenWidth / 2, screenHeight))
         for gameObject in gameObjects:
