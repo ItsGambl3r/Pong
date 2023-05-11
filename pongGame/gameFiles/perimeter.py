@@ -12,7 +12,7 @@ class Perimeter(Drawable):
         self.__surface = pygame.display.get_surface()
 
     def draw(self):
-        pygame.draw.rect(self.__surface, self.__color, (self.getX(), self.getY(), self.__width, self.__height), 3)
+        pygame.draw.rect(self.__surface, self.__color, (self.getX(), self.getY(), self.__width, self.__height), 1)
 
     def shrink(self, width, height):
         self.__width -= width

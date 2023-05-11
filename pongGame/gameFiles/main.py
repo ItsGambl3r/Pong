@@ -137,7 +137,7 @@ if __name__ == "__main__":
             crash.play()
             STARTDELAY = True
             computerScore += 1
-            computerScoreText.updateMessage(f": {computerScore}")
+            computerScoreText.updateMessage(f"Player2: {computerScore}")
             opacity += 10
 
         if ball.getLoc()[0] >= screenWidth - ball.getRadius():

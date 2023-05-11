@@ -34,7 +34,6 @@ class Text(Drawable):
     def draw(self):
         self.__surface = self.__fontObj.render(self.__message, \
         True, self.__color)
-        surface
         pygame.display.get_surface().blit(self.__surface, self.getLoc()) 
 
     def getRect(self):
