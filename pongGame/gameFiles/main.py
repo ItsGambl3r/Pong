@@ -45,7 +45,7 @@ except: userID = "Player"
 
 fpsClock = pygame.time.Clock()
 playerScore, computerScore = 0, 0
-playerScoreText = Text(f"{userID} {playerScore}", screenWidth * (1 / 4), screenHeight * (1 / 12), WHITE, 50)
+playerScoreText = Text(f"{userID}: {playerScore}", screenWidth * (1 / 4), screenHeight * (1 / 12), WHITE, 50)
 computerScoreText = Text(f"Player2: {computerScore}", screenWidth * (3 / 4), screenHeight * (1 / 12), WHITE, 50)
 
 for gameObject in gameObjects:
